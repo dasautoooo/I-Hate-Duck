@@ -39,12 +39,15 @@ extension StageScene {
         }
         
         duck = SKSpriteNode(imageNamed: duckImageName)
+        duck.position = CGPoint(x: 0, y: 140)
+        duck.xScale = 0.8
+        duck.yScale = 0.8
         stick = SKSpriteNode(imageNamed: "stick/\(Int.random(in: 1...2))")
         stick.anchorPoint = CGPoint(x: 0.5, y: 0)
         stick.position = CGPoint(x: 0, y: 0)
-        duck.position = CGPoint(x: 0, y: 170)
-        node.xScale = 0.8
-        node.yScale = 0.8
+        stick.xScale = 0.8
+        stick.yScale = 0.8
+    
         node.addChild(stick)
         node.addChild(duck)
         
