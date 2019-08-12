@@ -15,6 +15,8 @@
 		D70BE1D02301483500E2938C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D70BE1CE2301483500E2938C /* Main.storyboard */; };
 		D70BE1D22301483900E2938C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D70BE1D12301483900E2938C /* Assets.xcassets */; };
 		D70BE1D52301483900E2938C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D70BE1D32301483900E2938C /* LaunchScreen.storyboard */; };
+		D70DCFFC2301686F0011880E /* MyScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D70DCFFB2301686F0011880E /* MyScene.sks */; };
+		D70DCFFE230175DF0011880E /* Duck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DCFFD230175DF0011880E /* Duck.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		D70BE1D12301483900E2938C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D70BE1D42301483900E2938C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D70BE1D62301483900E2938C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D70DCFFB2301686F0011880E /* MyScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyScene.sks; sourceTree = "<group>"; };
+		D70DCFFD230175DF0011880E /* Duck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,8 +66,10 @@
 			children = (
 				D70BE1C42301483500E2938C /* AppDelegate.swift */,
 				D70BE1C62301483500E2938C /* StageScene.sks */,
+				D70DCFFB2301686F0011880E /* MyScene.sks */,
 				D70BE1C82301483500E2938C /* Actions.sks */,
 				D70BE1CA2301483500E2938C /* StageScene.swift */,
+				D70DCFFD230175DF0011880E /* Duck.swift */,
 				D70BE1CC2301483500E2938C /* GameViewController.swift */,
 				D70BE1CE2301483500E2938C /* Main.storyboard */,
 				D70BE1D12301483900E2938C /* Assets.xcassets */,
@@ -135,6 +141,7 @@
 				D70BE1C72301483500E2938C /* StageScene.sks in Resources */,
 				D70BE1D22301483900E2938C /* Assets.xcassets in Resources */,
 				D70BE1D52301483900E2938C /* LaunchScreen.storyboard in Resources */,
+				D70DCFFC2301686F0011880E /* MyScene.sks in Resources */,
 				D70BE1C92301483500E2938C /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,6 +153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D70DCFFE230175DF0011880E /* Duck.swift in Sources */,
 				D70BE1CB2301483500E2938C /* StageScene.swift in Sources */,
 				D70BE1CD2301483500E2938C /* GameViewController.swift in Sources */,
 				D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */,
