@@ -9,15 +9,27 @@
 import SpriteKit
 import GameplayKit
 
-class Target: SKNode { }
-
 class StageScene: SKScene {
+    
+    var duckMoveDuration: TimeInterval!
 
     override func didMove(to view: SKView) {
-        let duck = generateDuck(hasTarget: true)
-        duck.position = CGPoint(x: 200, y: 80)
-        duck.zPosition = 6
-        addChild(duck)
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            let duck = self.generateDuck(hasTarget: Bool.random())
+            duck.position = CGPoint(x: -10, y: Int.random(in: 60...90))
+            duck.zPosition = Int.random(in: 0...1) == 0 ? 4 : 6
+            self.addChild(duck)
+            
+            if duck.hasTarget {
+                self.duckMoveDuration = TimeInterval(Int.random(in: 2...4))
+            } else {
+                self.duckMoveDuration = TimeInterval(Int.random(in: 5...7))
+            }
+            
+            duck.run(.sequence([
+                .moveTo(x: 850, duration: self.duckMoveDuration),
+                .removeFromParent()]))
+        }
     }
 
 }
