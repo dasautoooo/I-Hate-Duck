@@ -12,8 +12,11 @@ import GameplayKit
 class StageScene: SKScene {
     
     // Nodes
-    var rifle: SKNode?
-    var crosshair: SKNode?
+    var rifle: SKSpriteNode?
+    var crosshair: SKSpriteNode?
+    
+    // Touches
+    var selectedNodes: [UITouch : SKSpriteNode] = [:]
     
     var duckMoveDuration: TimeInterval!
     
@@ -24,8 +27,8 @@ class StageScene: SKScene {
     var touchDifferent: (CGFloat, CGFloat)?
 
     override func didMove(to view: SKView) {
-        rifle = childNode(withName: "rifle")
-        crosshair = childNode(withName: "crosshair")
+        rifle = childNode(withName: "rifle") as? SKSpriteNode
+        crosshair = childNode(withName: "crosshair") as? SKSpriteNode
         
         crosshair?.position = CGPoint(x: view.frame.midX, y: view.frame.midY)
         
@@ -47,30 +50,50 @@ extension StageScene {
     
     // Touch Began
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
         guard let crosshair = crosshair else { return }
         
-        let xDifference = touch.location(in: self).x - crosshair.position.x
-        let yDifference = touch.location(in: self).y - crosshair.position.y
-        
-        touchDifferent = (xDifference, yDifference)
+        for touch in touches {
+            let location = touch.location(in: self)
+            if let node = self.atPoint(location) as? SKSpriteNode {
+                if !selectedNodes.values.contains(crosshair) && node.name != "fire" {
+                    selectedNodes[touch] = crosshair
+                    let xDifference = touch.location(in: self).x - crosshair.position.x
+                    let yDifference = touch.location(in: self).y - crosshair.position.y
+                    touchDifferent = (xDifference, yDifference)
+                }
+                
+                if node.name == "fire" {
+                    selectedNodes[touch] = node
+                }
+            }
+        }
     }
     
     // Touch Moved
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else { return }
         guard let crosshair = crosshair else { return }
         guard let touchDifferent = touchDifferent else { return }
         
-        let touchPosition = touch.location(in: self)
-        let newCrosshairPosition = CGPoint(x: touchPosition.x - touchDifferent.0 , y: touchPosition.y - touchDifferent.1)
-        
-        crosshair.position = newCrosshairPosition
+        for touch in touches {
+            let location = touch.location(in: self)
+            if let node = selectedNodes[touch] {
+                if node.name == "fire" {
+                    
+                } else {
+                    let newCrosshairPosition = CGPoint(x: location.x - touchDifferent.0 , y: location.y - touchDifferent.1)
+                    crosshair.position = newCrosshairPosition
+                }
+            }
+        }
     }
     
     // Touch Ended
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        touchDifferent = nil
+        for touch in touches {
+            if selectedNodes[touch] != nil {
+                selectedNodes[touch] = nil
+            }
+        }
     }
 }
 
