@@ -11,15 +11,67 @@ import GameplayKit
 
 class StageScene: SKScene {
     
+    // Nodes
+    var rifle: SKNode?
+    var crosshair: SKNode?
+    
     var duckMoveDuration: TimeInterval!
+    
     let targetXPosition: [Int] = [160, 240, 320, 400, 480, 560, 640]
     var usingTargetXPosition = Array<Int>()
+    
+    // Store the different value of x and y between touch point and crosshair when touchesBegan
+    var touchDifferent: (CGFloat, CGFloat)?
 
     override func didMove(to view: SKView) {
+        rifle = childNode(withName: "rifle")
+        crosshair = childNode(withName: "crosshair")
+        
+        crosshair?.position = CGPoint(x: view.frame.midX, y: view.frame.midY)
+        
         activeDucks()
         activeTargets()
     }
 
+}
+
+// MARK: - GameLoop
+extension StageScene {
+    override func update(_ currentTime: TimeInterval) {
+        syncRiflePosition()
+    }
+}
+
+// MARK: - Touches
+extension StageScene {
+    
+    // Touch Began
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        guard let crosshair = crosshair else { return }
+        
+        let xDifference = touch.location(in: self).x - crosshair.position.x
+        let yDifference = touch.location(in: self).y - crosshair.position.y
+        
+        touchDifferent = (xDifference, yDifference)
+    }
+    
+    // Touch Moved
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        guard let crosshair = crosshair else { return }
+        guard let touchDifferent = touchDifferent else { return }
+        
+        let touchPosition = touch.location(in: self)
+        let newCrosshairPosition = CGPoint(x: touchPosition.x - touchDifferent.0 , y: touchPosition.y - touchDifferent.1)
+        
+        crosshair.position = newCrosshairPosition
+    }
+    
+    // Touch Ended
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        touchDifferent = nil
+    }
 }
 
 // MARK: - Action
@@ -121,6 +173,13 @@ extension StageScene {
                 }]))
             
         }
+    }
+    
+    func syncRiflePosition() {
+        guard let rifle = rifle else { return }
+        guard let crosshair = crosshair else { return }
+        
+        rifle.position.x = crosshair.position.x + 100
     }
 }
 
