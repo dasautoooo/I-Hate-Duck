@@ -23,10 +23,18 @@ class StageScene: SKScene {
     let targetXPosition: [Int] = [160, 240, 320, 400, 480, 560, 640]
     var usingTargetXPosition = Array<Int>()
     
+    // The amount of ammunition
+    var ammunitionQuantity = 5
+    
+    var magazine = Array<Bullet>()
+    
     // Store the different value of x and y between touch point and crosshair when touchesBegan
     var touchDifferent: (CGFloat, CGFloat)?
 
     override func didMove(to view: SKView) {
+
+        loadUI()
+        
         rifle = childNode(withName: "rifle") as? SKSpriteNode
         crosshair = childNode(withName: "crosshair") as? SKSpriteNode
         
@@ -99,6 +107,33 @@ extension StageScene {
 
 // MARK: - Action
 extension StageScene {
+    func loadUI() {
+        
+        // Add fire button
+        let fire = SKSpriteNode(imageNamed: "fire")
+        fire.xScale = 1.3
+        fire.yScale = 1.3
+        fire.position = CGPoint(x: 720, y: 80)
+        fire.zPosition = 11
+        fire.name = "fire"
+        
+        addChild(fire)
+        
+        // Add empty magazine
+        let magazineNode = SKNode()
+        magazineNode.position = CGPoint(x: 760, y: 20)
+        magazineNode.zPosition = 11
+        
+        for i in 0...ammunitionQuantity - 1 {
+            let emptyBullet = Bullet(isEmpty: true)
+            emptyBullet.position = CGPoint(x: -30 * i, y: 0)
+            magazineNode.addChild(emptyBullet)
+            magazine.append(emptyBullet)
+        }
+        
+        addChild(magazineNode)
+    }
+    
     func generateDuck(hasTarget: Bool = false) -> Duck {
         var duck: SKSpriteNode
         var stick: SKSpriteNode
