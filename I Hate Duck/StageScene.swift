@@ -32,13 +32,8 @@ class StageScene: SKScene {
     var touchDifferent: (CGFloat, CGFloat)?
 
     override func didMove(to view: SKView) {
-
         loadUI()
-        
-        rifle = childNode(withName: "rifle") as? SKSpriteNode
-        crosshair = childNode(withName: "crosshair") as? SKSpriteNode
-        
-        crosshair?.position = CGPoint(x: view.frame.midX, y: view.frame.midY)
+        reloadMagazine()
         
         activeDucks()
         activeTargets()
@@ -50,6 +45,7 @@ class StageScene: SKScene {
 extension StageScene {
     override func update(_ currentTime: TimeInterval) {
         syncRiflePosition()
+        setBoundry()
     }
 }
 
@@ -108,14 +104,18 @@ extension StageScene {
 // MARK: - Action
 extension StageScene {
     func loadUI() {
+        // Rifle and Crosshair
+        if let scene = scene {
+            rifle = childNode(withName: "rifle") as? SKSpriteNode
+            crosshair = childNode(withName: "crosshair") as? SKSpriteNode
+            crosshair?.position = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
+        }
+        
         
         // Add fire button
-        let fire = SKSpriteNode(imageNamed: "fire")
-        fire.xScale = 1.3
-        fire.yScale = 1.3
+        let fire = FireButton()
         fire.position = CGPoint(x: 720, y: 80)
         fire.zPosition = 11
-        fire.name = "fire"
         
         addChild(fire)
         
@@ -238,6 +238,33 @@ extension StageScene {
         guard let crosshair = crosshair else { return }
         
         rifle.position.x = crosshair.position.x + 100
+    }
+    
+    func setBoundry() {
+        guard let crosshair = crosshair else { return }
+        guard let scene = scene else { return }
+        
+        if crosshair.position.x < scene.frame.minX {
+            crosshair.position.x = 0
+        }
+        
+        if crosshair.position.x > scene.frame.maxX {
+            crosshair.position.x = scene.frame.maxX
+        }
+        
+        if crosshair.position.y < scene.frame.minY {
+            crosshair.position.y = 0
+        }
+        
+        if crosshair.position.y > scene.frame.maxY {
+            crosshair.position.y = scene.frame.maxY
+        }
+    }
+    
+    func reloadMagazine() {
+        for bullet in magazine {
+            bullet.isEmpty = false
+        }
     }
 }
 

@@ -18,6 +18,8 @@
 		D70DCFFC2301686F0011880E /* MyScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D70DCFFB2301686F0011880E /* MyScene.sks */; };
 		D70DCFFE230175DF0011880E /* Duck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DCFFD230175DF0011880E /* Duck.swift */; };
 		D70DD000230189F70011880E /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DCFFF230189F70011880E /* Target.swift */; };
+		D7AF8D862305289200FAEE0C /* FireButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D852305289200FAEE0C /* FireButton.swift */; };
+		D7AF8D8823052D1800FAEE0C /* ActionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8723052D1800FAEE0C /* ActionKey.swift */; };
 		D7D1D3F3230511D700749685 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D1D3F2230511D700749685 /* Bullet.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		D70DCFFB2301686F0011880E /* MyScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyScene.sks; sourceTree = "<group>"; };
 		D70DCFFD230175DF0011880E /* Duck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Duck.swift; sourceTree = "<group>"; };
 		D70DCFFF230189F70011880E /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
+		D7AF8D852305289200FAEE0C /* FireButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireButton.swift; sourceTree = "<group>"; };
+		D7AF8D8723052D1800FAEE0C /* ActionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionKey.swift; sourceTree = "<group>"; };
 		D7D1D3F2230511D700749685 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +77,8 @@
 				D70DCFFB2301686F0011880E /* MyScene.sks */,
 				D70BE1C82301483500E2938C /* Actions.sks */,
 				D70BE1CA2301483500E2938C /* StageScene.swift */,
+				D7AF8D852305289200FAEE0C /* FireButton.swift */,
+				D7AF8D8723052D1800FAEE0C /* ActionKey.swift */,
 				D7D1D3F2230511D700749685 /* Bullet.swift */,
 				D70DCFFF230189F70011880E /* Target.swift */,
 				D70DCFFD230175DF0011880E /* Duck.swift */,
@@ -160,11 +166,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D70DCFFE230175DF0011880E /* Duck.swift in Sources */,
+				D7AF8D8823052D1800FAEE0C /* ActionKey.swift in Sources */,
 				D70BE1CB2301483500E2938C /* StageScene.swift in Sources */,
 				D70BE1CD2301483500E2938C /* GameViewController.swift in Sources */,
 				D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */,
 				D70DD000230189F70011880E /* Target.swift in Sources */,
 				D7D1D3F3230511D700749685 /* Bullet.swift in Sources */,
+				D7AF8D862305289200FAEE0C /* FireButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
