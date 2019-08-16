@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BE1C42301483500E2938C /* AppDelegate.swift */; };
 		D70BE1C72301483500E2938C /* StageScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D70BE1C62301483500E2938C /* StageScene.sks */; };
-		D70BE1C92301483500E2938C /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = D70BE1C82301483500E2938C /* Actions.sks */; };
 		D70BE1CB2301483500E2938C /* StageScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BE1CA2301483500E2938C /* StageScene.swift */; };
 		D70BE1CD2301483500E2938C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BE1CC2301483500E2938C /* GameViewController.swift */; };
 		D70BE1D02301483500E2938C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D70BE1CE2301483500E2938C /* Main.storyboard */; };
@@ -20,6 +19,9 @@
 		D70DD000230189F70011880E /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70DCFFF230189F70011880E /* Target.swift */; };
 		D7AF8D862305289200FAEE0C /* FireButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D852305289200FAEE0C /* FireButton.swift */; };
 		D7AF8D8823052D1800FAEE0C /* ActionKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8723052D1800FAEE0C /* ActionKey.swift */; };
+		D7AF8D8B230683DD00FAEE0C /* GameStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8A230683DD00FAEE0C /* GameStateMachine.swift */; };
+		D7AF8D8D2306883300FAEE0C /* Magazine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8C2306883300FAEE0C /* Magazine.swift */; };
+		D7AF8D8F2306AB7700FAEE0C /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8E2306AB7700FAEE0C /* Texture.swift */; };
 		D7D1D3F3230511D700749685 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D1D3F2230511D700749685 /* Bullet.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,7 +29,6 @@
 		D70BE1C12301483500E2938C /* I Hate Duck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "I Hate Duck.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70BE1C42301483500E2938C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D70BE1C62301483500E2938C /* StageScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StageScene.sks; sourceTree = "<group>"; };
-		D70BE1C82301483500E2938C /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		D70BE1CA2301483500E2938C /* StageScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageScene.swift; sourceTree = "<group>"; };
 		D70BE1CC2301483500E2938C /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		D70BE1CF2301483500E2938C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -39,6 +40,9 @@
 		D70DCFFF230189F70011880E /* Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		D7AF8D852305289200FAEE0C /* FireButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireButton.swift; sourceTree = "<group>"; };
 		D7AF8D8723052D1800FAEE0C /* ActionKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionKey.swift; sourceTree = "<group>"; };
+		D7AF8D8A230683DD00FAEE0C /* GameStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateMachine.swift; sourceTree = "<group>"; };
+		D7AF8D8C2306883300FAEE0C /* Magazine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magazine.swift; sourceTree = "<group>"; };
+		D7AF8D8E2306AB7700FAEE0C /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 		D7D1D3F2230511D700749685 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				D70BE1C32301483500E2938C /* I Hate Duck */,
+				D70BE1D62301483900E2938C /* Info.plist */,
 				D70BE1C22301483500E2938C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,23 +77,72 @@
 		D70BE1C32301483500E2938C /* I Hate Duck */ = {
 			isa = PBXGroup;
 			children = (
-				D70BE1C42301483500E2938C /* AppDelegate.swift */,
-				D70BE1C62301483500E2938C /* StageScene.sks */,
-				D70DCFFB2301686F0011880E /* MyScene.sks */,
-				D70BE1C82301483500E2938C /* Actions.sks */,
-				D70BE1CA2301483500E2938C /* StageScene.swift */,
-				D7AF8D852305289200FAEE0C /* FireButton.swift */,
-				D7AF8D8723052D1800FAEE0C /* ActionKey.swift */,
-				D7D1D3F2230511D700749685 /* Bullet.swift */,
-				D70DCFFF230189F70011880E /* Target.swift */,
-				D70DCFFD230175DF0011880E /* Duck.swift */,
-				D70BE1CC2301483500E2938C /* GameViewController.swift */,
-				D70BE1CE2301483500E2938C /* Main.storyboard */,
-				D70BE1D12301483900E2938C /* Assets.xcassets */,
-				D70BE1D32301483900E2938C /* LaunchScreen.storyboard */,
-				D70BE1D62301483900E2938C /* Info.plist */,
+				D7AF8D90230704A400FAEE0C /* Scene */,
+				D719D4DF2307063700FC6765 /* Logic */,
+				D719D4DE230705FA00FC6765 /* Node */,
+				D7AF8D91230704BF00FAEE0C /* Controller */,
+				D7AF8D892306837800FAEE0C /* Support */,
 			);
 			path = "I Hate Duck";
+			sourceTree = "<group>";
+		};
+		D719D4DE230705FA00FC6765 /* Node */ = {
+			isa = PBXGroup;
+			children = (
+				D719D4E02307069C00FC6765 /* Magazine */,
+				D7AF8D852305289200FAEE0C /* FireButton.swift */,
+				D70DCFFF230189F70011880E /* Target.swift */,
+				D70DCFFD230175DF0011880E /* Duck.swift */,
+			);
+			path = Node;
+			sourceTree = "<group>";
+		};
+		D719D4DF2307063700FC6765 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				D7AF8D8A230683DD00FAEE0C /* GameStateMachine.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		D719D4E02307069C00FC6765 /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				D7AF8D8C2306883300FAEE0C /* Magazine.swift */,
+				D7D1D3F2230511D700749685 /* Bullet.swift */,
+			);
+			path = Magazine;
+			sourceTree = "<group>";
+		};
+		D7AF8D892306837800FAEE0C /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				D7AF8D8723052D1800FAEE0C /* ActionKey.swift */,
+				D7AF8D8E2306AB7700FAEE0C /* Texture.swift */,
+				D70BE1D12301483900E2938C /* Assets.xcassets */,
+				D70BE1C42301483500E2938C /* AppDelegate.swift */,
+				D70BE1CE2301483500E2938C /* Main.storyboard */,
+				D70BE1D32301483900E2938C /* LaunchScreen.storyboard */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		D7AF8D90230704A400FAEE0C /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				D70DCFFB2301686F0011880E /* MyScene.sks */,
+				D70BE1C62301483500E2938C /* StageScene.sks */,
+				D70BE1CA2301483500E2938C /* StageScene.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		D7AF8D91230704BF00FAEE0C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D70BE1CC2301483500E2938C /* GameViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +208,6 @@
 				D70BE1D22301483900E2938C /* Assets.xcassets in Resources */,
 				D70BE1D52301483900E2938C /* LaunchScreen.storyboard in Resources */,
 				D70DCFFC2301686F0011880E /* MyScene.sks in Resources */,
-				D70BE1C92301483500E2938C /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,12 +219,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				D70DCFFE230175DF0011880E /* Duck.swift in Sources */,
+				D7AF8D8D2306883300FAEE0C /* Magazine.swift in Sources */,
 				D7AF8D8823052D1800FAEE0C /* ActionKey.swift in Sources */,
 				D70BE1CB2301483500E2938C /* StageScene.swift in Sources */,
 				D70BE1CD2301483500E2938C /* GameViewController.swift in Sources */,
 				D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */,
+				D7AF8D8F2306AB7700FAEE0C /* Texture.swift in Sources */,
 				D70DD000230189F70011880E /* Target.swift in Sources */,
 				D7D1D3F3230511D700749685 /* Bullet.swift in Sources */,
+				D7AF8D8B230683DD00FAEE0C /* GameStateMachine.swift in Sources */,
 				D7AF8D862305289200FAEE0C /* FireButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

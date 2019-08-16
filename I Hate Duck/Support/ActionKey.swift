@@ -9,7 +9,7 @@
 import Foundation
 
 enum ActionKey: String {
-    case reloadingRotation
+    case reloading
     
     var key: String {
         return rawValue

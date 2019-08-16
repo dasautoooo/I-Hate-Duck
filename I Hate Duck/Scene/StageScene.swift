@@ -14,9 +14,13 @@ class StageScene: SKScene {
     // Nodes
     var rifle: SKSpriteNode?
     var crosshair: SKSpriteNode?
+    let fire = FireButton()
     
     // Touches
     var selectedNodes: [UITouch : SKSpriteNode] = [:]
+    
+    // Game state machine
+    var gameStateMachine: GKStateMachine!
     
     var duckMoveDuration: TimeInterval!
     
@@ -26,14 +30,21 @@ class StageScene: SKScene {
     // The amount of ammunition
     var ammunitionQuantity = 5
     
-    var magazine = Array<Bullet>()
+    var magazine: Magazine!
     
     // Store the different value of x and y between touch point and crosshair when touchesBegan
     var touchDifferent: (CGFloat, CGFloat)?
 
     override func didMove(to view: SKView) {
         loadUI()
-        reloadMagazine()
+        
+        gameStateMachine = GKStateMachine(states: [
+            ShootingState(fire: fire, magazine: magazine),
+            ReloadingState(fire: fire, magazine: magazine),
+            ReadyState(fire: fire, magazine: magazine)])
+
+        gameStateMachine.enter(ReadyState.self)
+        
         
         activeDucks()
         activeTargets()
@@ -59,15 +70,34 @@ extension StageScene {
         for touch in touches {
             let location = touch.location(in: self)
             if let node = self.atPoint(location) as? SKSpriteNode {
-                if !selectedNodes.values.contains(crosshair) && node.name != "fire" {
+                if !selectedNodes.values.contains(crosshair) && !(node is FireButton) {
                     selectedNodes[touch] = crosshair
                     let xDifference = touch.location(in: self).x - crosshair.position.x
                     let yDifference = touch.location(in: self).y - crosshair.position.y
                     touchDifferent = (xDifference, yDifference)
                 }
                 
-                if node.name == "fire" {
-                    selectedNodes[touch] = node
+                // Actual shooting
+                if node is FireButton {
+                    selectedNodes[touch] = fire
+                    if !fire.isReloading {
+                        fire.isPressed = true
+                        // Set a bullet to empty
+                        magazine.shoot()
+                        
+                        if magazine.needToReload() {
+                            gameStateMachine.enter(ReloadingState.self)
+                        }
+                        // Find the node which crosshair is landed
+                        
+                        // Check the node type, in order to add right shot color on it
+                        
+                        // Add shot image
+                        
+                        // TODO Score system
+                        
+                        //
+                    }
                 }
             }
         }
@@ -95,6 +125,9 @@ extension StageScene {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
             if selectedNodes[touch] != nil {
+                if let fire = selectedNodes[touch] as? FireButton {
+                    fire.isPressed = false
+                }
                 selectedNodes[touch] = nil
             }
         }
@@ -113,7 +146,6 @@ extension StageScene {
         
         
         // Add fire button
-        let fire = FireButton()
         fire.position = CGPoint(x: 720, y: 80)
         fire.zPosition = 11
         
@@ -124,13 +156,16 @@ extension StageScene {
         magazineNode.position = CGPoint(x: 760, y: 20)
         magazineNode.zPosition = 11
         
+        var bullets = Array<Bullet>()
+        
         for i in 0...ammunitionQuantity - 1 {
-            let emptyBullet = Bullet(isEmpty: true)
-            emptyBullet.position = CGPoint(x: -30 * i, y: 0)
-            magazineNode.addChild(emptyBullet)
-            magazine.append(emptyBullet)
+            let bullet = Bullet()
+            bullet.position = CGPoint(x: -30 * i, y: 0)
+            magazineNode.addChild(bullet)
+            bullets.append(bullet)
         }
         
+        magazine = Magazine(bullets: bullets)
         addChild(magazineNode)
     }
     
@@ -258,12 +293,6 @@ extension StageScene {
         
         if crosshair.position.y > scene.frame.maxY {
             crosshair.position.y = scene.frame.maxY
-        }
-    }
-    
-    func reloadMagazine() {
-        for bullet in magazine {
-            bullet.isEmpty = false
         }
     }
 }
