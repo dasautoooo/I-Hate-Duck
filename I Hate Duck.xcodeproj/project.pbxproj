@@ -23,6 +23,7 @@
 		D7AF8D8D2306883300FAEE0C /* Magazine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8C2306883300FAEE0C /* Magazine.swift */; };
 		D7AF8D8F2306AB7700FAEE0C /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8E2306AB7700FAEE0C /* Texture.swift */; };
 		D7D1D3F3230511D700749685 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D1D3F2230511D700749685 /* Bullet.swift */; };
+		D7FAB13E230D4408004ED371 /* ScoreNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FAB13D230D4408004ED371 /* ScoreNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		D7AF8D8C2306883300FAEE0C /* Magazine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magazine.swift; sourceTree = "<group>"; };
 		D7AF8D8E2306AB7700FAEE0C /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 		D7D1D3F2230511D700749685 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
+		D7FAB13D230D4408004ED371 /* ScoreNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreNumber.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				D70BE1C42301483500E2938C /* AppDelegate.swift */,
 				D70BE1CE2301483500E2938C /* Main.storyboard */,
 				D70BE1D32301483900E2938C /* LaunchScreen.storyboard */,
+				D7FAB13D230D4408004ED371 /* ScoreNumber.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				D7AF8D8823052D1800FAEE0C /* ActionKey.swift in Sources */,
 				D70BE1CB2301483500E2938C /* StageScene.swift in Sources */,
 				D70BE1CD2301483500E2938C /* GameViewController.swift in Sources */,
+				D7FAB13E230D4408004ED371 /* ScoreNumber.swift in Sources */,
 				D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */,
 				D7AF8D8F2306AB7700FAEE0C /* Texture.swift in Sources */,
 				D70DD000230189F70011880E /* Target.swift in Sources */,

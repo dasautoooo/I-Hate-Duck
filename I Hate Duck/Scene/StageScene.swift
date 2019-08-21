@@ -16,6 +16,15 @@ class StageScene: SKScene {
     var crosshair: SKSpriteNode?
     let fire = FireButton()
     
+    // Score
+    var tatalScore = 0
+    let targetScore = 30
+    let duckScore = 10
+    
+    // Count
+    var duckCount = 0
+    var targetCount = 0
+    
     // Touches
     var selectedNodes: [UITouch : SKSpriteNode] = [:]
     
@@ -88,10 +97,13 @@ extension StageScene {
                 // Actual shooting
                 if node is FireButton {
                     selectedNodes[touch] = fire
+                    
+                    // Check if is reloading
                     if !fire.isReloading {
                         fire.isPressed = true
                         magazine.shoot()
                         
+                        // Need to reload, enter ReloadingState
                         if magazine.needToReload() {
                             gameStateMachine.enter(ReloadingState.self)
                         }
@@ -110,12 +122,33 @@ extension StageScene {
                                         shootNode = node
                                     }
                                 }
-
                             }
                         }
+                        
+                        var scoreText = ""
+                        var shotImageName = ""
+                        
+                        switch shootNode.name {
+                        case "duck":
+                            scoreText = "+\(duckScore)"
+                            duckCount += 1
+                            shotImageName = "shot_blue"
+                        case "duck_target":
+                            scoreText = "+\(duckScore + targetScore)"
+                            duckCount += 1
+                            targetCount += 1
+                            shotImageName = "shot_blue"
+                        case "target":
+                            scoreText = "+\(targetScore)"
+                            targetCount += 1
+                            shotImageName = "shot_brown"
+                        default:
+                            return
+                        }
 
+                        // Add shot image
                         let shotPosition = self.convert(crosshair.position, to: shootNode)
-                        let shot = SKSpriteNode(imageNamed: "shot_blue")
+                        let shot = SKSpriteNode(imageNamed: shotImageName)
                         shot.position = shotPosition
                         shootNode.addChild(shot)
                         shot.run(.sequence([
@@ -123,17 +156,20 @@ extension StageScene {
                             .fadeAlpha(to: 0.0, duration: 0.3),
                             .removeFromParent()]))
 
-                        
+                        // Add score text
+                        let scorePosition = CGPoint(x: crosshair.position.x + 10, y: crosshair.position.y + 30)
+                        let scoreNode = generateTextNode(from: scoreText)
+                        scoreNode.position = scorePosition
+                        scoreNode.zPosition = 9
+                        scoreNode.xScale = 0.5
+                        scoreNode.yScale = 0.5
+                        addChild(scoreNode)
+                        scoreNode.run(.sequence([
+                            .wait(forDuration: 0.5),
+                            .fadeOut(withDuration: 0.2),
+                            .removeFromParent()]))
 
-                        
 
-                        // Check the node type, in order to add right shot color on it
-                        
-                        // Add shot image
-                        
-                        // TODO Score system
-                        
-                        //
                     }
                 }
             }
@@ -365,6 +401,52 @@ extension StageScene {
         if crosshair.position.y > scene.frame.maxY {
             crosshair.position.y = scene.frame.maxY
         }
+    }
+    
+    func generateTextNode(from text: String) -> SKNode {
+        let node = SKNode()
+        var width: CGFloat = 0.0
+        
+        for character in text {
+            var characterNode = SKSpriteNode()
+            
+            if character == "0" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.zero.textureName)
+            } else if character == "1" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.one.textureName)
+            } else if character == "2" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.two.textureName)
+            } else if character == "3" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.three.textureName)
+            } else if character == "4" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.four.textureName)
+            } else if character == "5" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.five.textureName)
+            } else if character == "6" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.six.textureName)
+            } else if character == "7" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.seven.textureName)
+            } else if character == "8" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.eight.textureName)
+            } else if character == "9" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.nine.textureName)
+            } else if character == "+" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.plus.textureName)
+            } else if character == "*" {
+                characterNode = SKSpriteNode(imageNamed: ScoreNumber.multiplication.textureName)
+            } else {
+                continue
+            }
+            
+            node.addChild(characterNode)
+            
+            characterNode.anchorPoint = CGPoint(x: 0, y: 0.5)
+            characterNode.position = CGPoint(x: width, y: 0.0)
+            
+            width += characterNode.size.width
+        }
+        
+        return node
     }
 }
 
