@@ -15,6 +15,8 @@ enum Texture: String {
     case fireButtonReloading = "fire_reloading"
     case fireButtonNormal = "fire_normal"
     case fireButtonPressed = "fire_pressed"
+    case duckIcon = "icon_duck"
+    case targetIcon = "icon_target"
     
     var imageName: String {
         return rawValue

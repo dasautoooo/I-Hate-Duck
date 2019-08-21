@@ -15,10 +15,12 @@ class StageScene: SKScene {
     var rifle: SKSpriteNode?
     var crosshair: SKSpriteNode?
     let fire = FireButton()
+    var duckScoreNode: SKNode!
+    var targetScoreNode: SKNode!
     
     // Score
-    var tatalScore = 0
-    let targetScore = 30
+    var totalScore = 0
+    let targetScore = 10
     let duckScore = 10
     
     // Count
@@ -131,15 +133,18 @@ extension StageScene {
                         switch shootNode.name {
                         case "duck":
                             scoreText = "+\(duckScore)"
+                            totalScore += duckScore
                             duckCount += 1
                             shotImageName = "shot_blue"
                         case "duck_target":
                             scoreText = "+\(duckScore + targetScore)"
+                            totalScore += duckScore + targetScore
                             duckCount += 1
                             targetCount += 1
                             shotImageName = "shot_blue"
                         case "target":
                             scoreText = "+\(targetScore)"
+                            totalScore += targetScore
                             targetCount += 1
                             shotImageName = "shot_brown"
                         default:
@@ -168,6 +173,10 @@ extension StageScene {
                             .wait(forDuration: 0.5),
                             .fadeOut(withDuration: 0.2),
                             .removeFromParent()]))
+                        
+                        // Update score node
+                        update(score: String(duckCount * duckScore), node: &duckScoreNode)
+                        update(score: String(targetCount * targetScore), node: &targetScoreNode)
 
                         // Animate shoot node
                         shootNode.physicsBody = nil
@@ -234,6 +243,32 @@ extension StageScene {
         
         addChild(fire)
         
+        // Add icons
+        let duckIcon = SKSpriteNode(imageNamed: Texture.duckIcon.imageName)
+        duckIcon.position = CGPoint(x: 36, y: 365)
+        duckIcon.zPosition = 11
+        addChild(duckIcon)
+        
+        let targetIcon = SKSpriteNode(imageNamed: Texture.targetIcon.imageName)
+        targetIcon.position = CGPoint(x: 36, y: 325)
+        targetIcon.zPosition = 11
+        addChild(targetIcon)
+        
+        // Add score nodes
+        duckScoreNode = generateTextNode(from: "0")
+        duckScoreNode.position = CGPoint(x: 60, y: 365)
+        duckScoreNode.zPosition = 11
+        duckScoreNode.xScale = 0.5
+        duckScoreNode.yScale = 0.5
+        addChild(duckScoreNode)
+        
+        targetScoreNode = generateTextNode(from: "0")
+        targetScoreNode.position = CGPoint(x: 60, y: 325)
+        targetScoreNode.zPosition = 11
+        targetScoreNode.xScale = 0.5
+        targetScoreNode.yScale = 0.5
+        addChild(targetScoreNode)
+
         // Add empty magazine
         let magazineNode = SKNode()
         magazineNode.position = CGPoint(x: 760, y: 20)
@@ -455,6 +490,23 @@ extension StageScene {
         }
         
         return node
+    }
+    
+    func update(score: String, node: inout SKNode) {
+        let position = node.position
+        let zPositon = node.zPosition
+        let xScale = node.xScale
+        let yScale = node.yScale
+        
+        node.removeFromParent()
+        
+        node = generateTextNode(from: score)
+        node.position = position
+        node.zPosition = zPositon
+        node.xScale = xScale
+        node.yScale = yScale
+        
+        addChild(node)
     }
 }
 
