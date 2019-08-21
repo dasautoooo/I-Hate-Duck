@@ -32,6 +32,14 @@ class StageScene: SKScene {
     
     var magazine: Magazine!
     
+    var zPositionDecimal = 0.001 {
+        didSet {
+            if zPositionDecimal == 1 {
+                zPositionDecimal = 0.001
+            }
+        }
+    }
+    
     // Store the different value of x and y between touch point and crosshair when touchesBegan
     var touchDifferent: (CGFloat, CGFloat)?
 
@@ -82,14 +90,43 @@ extension StageScene {
                     selectedNodes[touch] = fire
                     if !fire.isReloading {
                         fire.isPressed = true
-                        // Set a bullet to empty
                         magazine.shoot()
                         
                         if magazine.needToReload() {
                             gameStateMachine.enter(ReloadingState.self)
                         }
-                        // Find the node which crosshair is landed
                         
+                        var shootNode = SKSpriteNode()
+                        var biggestZPosition: CGFloat = 0.0
+                        
+                        // Find the node which crosshair is landed
+                        self.physicsWorld.enumerateBodies(at: crosshair.position) { (body, pointer) in
+                            guard let node = body.node as? SKSpriteNode else { return }
+                            
+                            if node.name == "duck" || node.name == "duck_target" || node.name == "target" {
+                                if let parentNode = node.parent {
+                                    if parentNode.zPosition > biggestZPosition {
+                                        biggestZPosition = parentNode.zPosition
+                                        shootNode = node
+                                    }
+                                }
+
+                            }
+                        }
+
+                        let shotPosition = self.convert(crosshair.position, to: shootNode)
+                        let shot = SKSpriteNode(imageNamed: "shot_blue")
+                        shot.position = shotPosition
+                        shootNode.addChild(shot)
+                        shot.run(.sequence([
+                            .wait(forDuration: 2),
+                            .fadeAlpha(to: 0.0, duration: 0.3),
+                            .removeFromParent()]))
+
+                        
+
+                        
+
                         // Check the node type, in order to add right shot color on it
                         
                         // Add shot image
@@ -147,6 +184,8 @@ extension StageScene {
         
         // Add fire button
         fire.position = CGPoint(x: 720, y: 80)
+        fire.xScale = 1.3
+        fire.yScale = 1.3
         fire.zPosition = 11
         
         addChild(fire)
@@ -173,23 +212,37 @@ extension StageScene {
         var duck: SKSpriteNode
         var stick: SKSpriteNode
         var duckImageName: String
+        var duckNodeName: String
         var node = Duck()
+        var texture = SKTexture()
         
         if hasTarget {
             duckImageName = "duck_target/\(Int.random(in: 1...3))"
+            texture = SKTexture(imageNamed: duckImageName)
+            duckNodeName = "duck_target"
             node = Duck(hasTarget: true)
         } else {
             duckImageName = "duck/\(Int.random(in: 1...3))"
+            texture = SKTexture(imageNamed: duckImageName)
+            duckNodeName = "duck"
             node = Duck()
         }
         
-        duck = SKSpriteNode(imageNamed: duckImageName)
+        duck = SKSpriteNode(texture: texture)
+        duck.name = duckNodeName
         duck.position = CGPoint(x: 0, y: 140)
-        duck.xScale = 0.8
-        duck.yScale = 0.8
+        
+        let physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.5, size: texture.size())
+        physicsBody.affectedByGravity = false
+        physicsBody.isDynamic = false
+        duck.physicsBody = physicsBody
+        
         stick = SKSpriteNode(imageNamed: "stick/\(Int.random(in: 1...2))")
         stick.anchorPoint = CGPoint(x: 0.5, y: 0)
         stick.position = CGPoint(x: 0, y: 0)
+        
+        duck.xScale = 0.8
+        duck.yScale = 0.8
         stick.xScale = 0.8
         stick.yScale = 0.8
     
@@ -204,20 +257,25 @@ extension StageScene {
         var target: SKSpriteNode
         var stick: SKSpriteNode
         let node = Target()
+        let texture = SKTexture(imageNamed: "target/\(Int.random(in: 1...3))")
         
-        target = SKSpriteNode(imageNamed: "target/\(Int.random(in: 1...3))")
+        target = SKSpriteNode(texture: texture)
+        
+        stick = SKSpriteNode(imageNamed: "stick_metal")
+        
         target.xScale = 0.5
         target.yScale = 0.5
         target.position = CGPoint(x: 0, y: 95)
-        
-        stick = SKSpriteNode(imageNamed: "stick_metal")
+        target.name = "target"
         stick.xScale = 0.5
         stick.yScale = 0.5
         stick.anchorPoint = CGPoint(x: 0.5, y: 0)
         stick.position = CGPoint(x: 0, y: 0)
-        
+
         node.addChild(stick)
         node.addChild(target)
+        
+
         
         return node
     }
@@ -227,6 +285,9 @@ extension StageScene {
             let duck = self.generateDuck(hasTarget: Bool.random())
             duck.position = CGPoint(x: -10, y: Int.random(in: 60...90))
             duck.zPosition = Int.random(in: 0...1) == 0 ? 4 : 6
+            duck.zPosition = duck.zPosition + CGFloat(self.zPositionDecimal)
+            self.zPositionDecimal += 0.001
+            
             self.addChild(duck)
             
             if duck.hasTarget {
@@ -256,8 +317,18 @@ extension StageScene {
             target.yScale = 0
             self.addChild(target)
             
+            let physicsBody = SKPhysicsBody(circleOfRadius: 71/2)
+            physicsBody.affectedByGravity = false
+            physicsBody.isDynamic = false
+            physicsBody.allowsRotation = false
+            
             target.run(.sequence([
                 .scaleY(to: 1, duration: 0.2),
+                .run {
+                    if let node = target.childNode(withName: "target") {
+                        node.physicsBody = physicsBody
+                    }
+                },
                 .wait(forDuration: TimeInterval(Int.random(in: 3...6))),
                 .scaleY(to: 0, duration: 0.2),
                 .removeFromParent(),

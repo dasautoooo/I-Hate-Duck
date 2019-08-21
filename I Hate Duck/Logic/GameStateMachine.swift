@@ -53,6 +53,8 @@ class ShootingState: GameState {
 }
 
 class ReloadingState: GameState {
+    let reloadingTime: Double = 0.0
+    
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         if stateClass is ShootingState.Type && !magazine.needToReload() {
             return true
@@ -82,7 +84,7 @@ class ReloadingState: GameState {
         for (i, bullet) in magazine.bullets.reversed().enumerated() {
             var actions = [SKAction]()
             
-            let waitAction = SKAction.wait(forDuration: TimeInterval(0.3 * Double(i)))
+            let waitAction = SKAction.wait(forDuration: TimeInterval(reloadingTime * Double(i)))
             actions.append(waitAction)
             actions.append(bulletReloadingAction)
             actions.append(SKAction.run {
