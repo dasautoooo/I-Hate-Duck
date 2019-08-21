@@ -53,7 +53,7 @@ class ShootingState: GameState {
 }
 
 class ReloadingState: GameState {
-    let reloadingTime: Double = 0.0
+    let reloadingTime: Double = 0.25
     
     override func isValidNextState(_ stateClass: AnyClass) -> Bool {
         if stateClass is ShootingState.Type && !magazine.needToReload() {

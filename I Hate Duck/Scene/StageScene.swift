@@ -169,6 +169,14 @@ extension StageScene {
                             .fadeOut(withDuration: 0.2),
                             .removeFromParent()]))
 
+                        // Animate shoot node
+                        shootNode.physicsBody = nil
+                        
+                        if let node = shootNode.parent {
+                            node.run(.sequence([
+                                .wait(forDuration: 0.2),
+                                .scaleY(to: 0.0, duration: 0.2)]))
+                        }
 
                     }
                 }
@@ -220,8 +228,8 @@ extension StageScene {
         
         // Add fire button
         fire.position = CGPoint(x: 720, y: 80)
-        fire.xScale = 1.3
-        fire.yScale = 1.3
+        fire.xScale = 1.7
+        fire.yScale = 1.7
         fire.zPosition = 11
         
         addChild(fire)
