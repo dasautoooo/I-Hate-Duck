@@ -87,6 +87,10 @@ class ReloadingState: GameState {
             let waitAction = SKAction.wait(forDuration: TimeInterval(reloadingTime * Double(i)))
             actions.append(waitAction)
             actions.append(bulletReloadingAction)
+            actions.append(.run {
+                Audio.sharedInstance.playSound(soundFileName: Sound.reload.fileName)
+                Audio.sharedInstance.player(with: Sound.reload.fileName)?.volume = 0.3
+            })
             actions.append(SKAction.run {
                 bullet.reloaded()
             })

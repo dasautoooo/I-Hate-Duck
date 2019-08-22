@@ -57,6 +57,10 @@ class StageScene: SKScene {
     override func didMove(to view: SKView) {
         loadUI()
         
+        Audio.sharedInstance.playSound(soundFileName: Sound.musicLoop.fileName)
+        Audio.sharedInstance.player(with: Sound.musicLoop.fileName)?.volume = 0.3
+        Audio.sharedInstance.player(with: Sound.musicLoop.fileName)?.numberOfLoops = -1
+        
         gameStateMachine = GKStateMachine(states: [
             ShootingState(fire: fire, magazine: magazine),
             ReloadingState(fire: fire, magazine: magazine),
@@ -104,6 +108,9 @@ extension StageScene {
                     if !fire.isReloading {
                         fire.isPressed = true
                         magazine.shoot()
+                        
+                        // Play sound
+                        Audio.sharedInstance.playSound(soundFileName: Sound.hit.fileName)
                         
                         // Need to reload, enter ReloadingState
                         if magazine.needToReload() {
@@ -173,6 +180,10 @@ extension StageScene {
                             .wait(forDuration: 0.5),
                             .fadeOut(withDuration: 0.2),
                             .removeFromParent()]))
+                        
+                        // Play score sound
+                        Audio.sharedInstance.playSound(soundFileName: Sound.score.fileName)
+//                        Audio.sharedInstance.player(with: Sound.reload.fileName)?.volume = 0.5
                         
                         // Update score node
                         update(score: String(duckCount * duckScore), node: &duckScoreNode)

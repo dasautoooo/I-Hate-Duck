@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D70B9C21230E6AE400F0E77A /* reload.wav in Resources */ = {isa = PBXBuildFile; fileRef = D70B9C20230E6AE400F0E77A /* reload.wav */; };
+		D70B9C23230E6D4800F0E77A /* score.wav in Resources */ = {isa = PBXBuildFile; fileRef = D70B9C22230E6D4800F0E77A /* score.wav */; };
 		D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BE1C42301483500E2938C /* AppDelegate.swift */; };
 		D70BE1C72301483500E2938C /* StageScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D70BE1C62301483500E2938C /* StageScene.sks */; };
 		D70BE1CB2301483500E2938C /* StageScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BE1CA2301483500E2938C /* StageScene.swift */; };
@@ -24,9 +26,15 @@
 		D7AF8D8F2306AB7700FAEE0C /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8E2306AB7700FAEE0C /* Texture.swift */; };
 		D7D1D3F3230511D700749685 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D1D3F2230511D700749685 /* Bullet.swift */; };
 		D7FAB13E230D4408004ED371 /* ScoreNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FAB13D230D4408004ED371 /* ScoreNumber.swift */; };
+		D7FAB140230E5AC3004ED371 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FAB13F230E5AC3004ED371 /* Audio.swift */; };
+		D7FAB143230E6311004ED371 /* Cheerful Annoyance.wav in Resources */ = {isa = PBXBuildFile; fileRef = D7FAB142230E6310004ED371 /* Cheerful Annoyance.wav */; };
+		D7FAB147230E672C004ED371 /* hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = D7FAB146230E672C004ED371 /* hit.wav */; };
+		D7FAB149230E6744004ED371 /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FAB148230E6744004ED371 /* Sound.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D70B9C20230E6AE400F0E77A /* reload.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = reload.wav; sourceTree = "<group>"; };
+		D70B9C22230E6D4800F0E77A /* score.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = score.wav; sourceTree = "<group>"; };
 		D70BE1C12301483500E2938C /* I Hate Duck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "I Hate Duck.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70BE1C42301483500E2938C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D70BE1C62301483500E2938C /* StageScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StageScene.sks; sourceTree = "<group>"; };
@@ -46,6 +54,10 @@
 		D7AF8D8E2306AB7700FAEE0C /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 		D7D1D3F2230511D700749685 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		D7FAB13D230D4408004ED371 /* ScoreNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreNumber.swift; sourceTree = "<group>"; };
+		D7FAB13F230E5AC3004ED371 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		D7FAB142230E6310004ED371 /* Cheerful Annoyance.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Cheerful Annoyance.wav"; sourceTree = "<group>"; };
+		D7FAB146230E672C004ED371 /* hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hit.wav; sourceTree = "<group>"; };
+		D7FAB148230E6744004ED371 /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +75,10 @@
 			isa = PBXGroup;
 			children = (
 				D70BE1C32301483500E2938C /* I Hate Duck */,
+				D7FAB142230E6310004ED371 /* Cheerful Annoyance.wav */,
+				D7FAB146230E672C004ED371 /* hit.wav */,
+				D70B9C20230E6AE400F0E77A /* reload.wav */,
+				D70B9C22230E6D4800F0E77A /* score.wav */,
 				D70BE1D62301483900E2938C /* Info.plist */,
 				D70BE1C22301483500E2938C /* Products */,
 			);
@@ -126,6 +142,8 @@
 				D70BE1CE2301483500E2938C /* Main.storyboard */,
 				D70BE1D32301483900E2938C /* LaunchScreen.storyboard */,
 				D7FAB13D230D4408004ED371 /* ScoreNumber.swift */,
+				D7FAB13F230E5AC3004ED371 /* Audio.swift */,
+				D7FAB148230E6744004ED371 /* Sound.swift */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -207,9 +225,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D70BE1D02301483500E2938C /* Main.storyboard in Resources */,
+				D70B9C23230E6D4800F0E77A /* score.wav in Resources */,
 				D70BE1C72301483500E2938C /* StageScene.sks in Resources */,
 				D70BE1D22301483900E2938C /* Assets.xcassets in Resources */,
 				D70BE1D52301483900E2938C /* LaunchScreen.storyboard in Resources */,
+				D7FAB143230E6311004ED371 /* Cheerful Annoyance.wav in Resources */,
+				D70B9C21230E6AE400F0E77A /* reload.wav in Resources */,
+				D7FAB147230E672C004ED371 /* hit.wav in Resources */,
 				D70DCFFC2301686F0011880E /* MyScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +250,8 @@
 				D70BE1CD2301483500E2938C /* GameViewController.swift in Sources */,
 				D7FAB13E230D4408004ED371 /* ScoreNumber.swift in Sources */,
 				D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */,
+				D7FAB149230E6744004ED371 /* Sound.swift in Sources */,
+				D7FAB140230E5AC3004ED371 /* Audio.swift in Sources */,
 				D7AF8D8F2306AB7700FAEE0C /* Texture.swift in Sources */,
 				D70DD000230189F70011880E /* Target.swift in Sources */,
 				D7D1D3F3230511D700749685 /* Bullet.swift in Sources */,
