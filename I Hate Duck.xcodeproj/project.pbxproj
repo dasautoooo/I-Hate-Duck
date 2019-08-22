@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D70B9C21230E6AE400F0E77A /* reload.wav in Resources */ = {isa = PBXBuildFile; fileRef = D70B9C20230E6AE400F0E77A /* reload.wav */; };
 		D70B9C23230E6D4800F0E77A /* score.wav in Resources */ = {isa = PBXBuildFile; fileRef = D70B9C22230E6D4800F0E77A /* score.wav */; };
+		D70B9C25230E758500F0E77A /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70B9C24230E758500F0E77A /* GameManager.swift */; };
 		D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BE1C42301483500E2938C /* AppDelegate.swift */; };
 		D70BE1C72301483500E2938C /* StageScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D70BE1C62301483500E2938C /* StageScene.sks */; };
 		D70BE1CB2301483500E2938C /* StageScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70BE1CA2301483500E2938C /* StageScene.swift */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		D70B9C20230E6AE400F0E77A /* reload.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = reload.wav; sourceTree = "<group>"; };
 		D70B9C22230E6D4800F0E77A /* score.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = score.wav; sourceTree = "<group>"; };
+		D70B9C24230E758500F0E77A /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		D70BE1C12301483500E2938C /* I Hate Duck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "I Hate Duck.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D70BE1C42301483500E2938C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D70BE1C62301483500E2938C /* StageScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StageScene.sks; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				D7AF8D8A230683DD00FAEE0C /* GameStateMachine.swift */,
+				D70B9C24230E758500F0E77A /* GameManager.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				D7AF8D8D2306883300FAEE0C /* Magazine.swift in Sources */,
 				D7AF8D8823052D1800FAEE0C /* ActionKey.swift in Sources */,
 				D70BE1CB2301483500E2938C /* StageScene.swift in Sources */,
+				D70B9C25230E758500F0E77A /* GameManager.swift in Sources */,
 				D70BE1CD2301483500E2938C /* GameViewController.swift in Sources */,
 				D7FAB13E230D4408004ED371 /* ScoreNumber.swift in Sources */,
 				D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */,
