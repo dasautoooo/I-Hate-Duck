@@ -10,7 +10,7 @@ import Foundation
 import SpriteKit
 
 class GameManager {
-    let scene: SKScene!
+    unowned var scene: SKScene!
     
     // Score
     var totalScore = 0

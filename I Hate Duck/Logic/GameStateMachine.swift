@@ -11,7 +11,7 @@ import GameplayKit
 
 class GameState: GKState {
     unowned var fire: FireButton
-    var magazine: Magazine
+    unowned var magazine: Magazine
     
     init(fire: FireButton, magazine: Magazine) {
         self.fire = fire
