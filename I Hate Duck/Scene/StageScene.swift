@@ -104,27 +104,10 @@ extension StageScene {
                         }
 
                         // Add shot image
-                        let shotPosition = self.convert(crosshair.position, to: shootNode)
-                        let shot = SKSpriteNode(imageNamed: shotImageName)
-                        shot.position = shotPosition
-                        shootNode.addChild(shot)
-                        shot.run(.sequence([
-                            .wait(forDuration: 2),
-                            .fadeAlpha(to: 0.0, duration: 0.3),
-                            .removeFromParent()]))
+                        manager.addShot(imageNamed: shotImageName, to: shootNode, on: crosshair.position)
 
                         // Add score text
-                        let scorePosition = CGPoint(x: crosshair.position.x + 10, y: crosshair.position.y + 30)
-                        let scoreNode = manager.generateTextNode(from: scoreText)
-                        scoreNode.position = scorePosition
-                        scoreNode.zPosition = 9
-                        scoreNode.xScale = 0.5
-                        scoreNode.yScale = 0.5
-                        addChild(scoreNode)
-                        scoreNode.run(.sequence([
-                            .wait(forDuration: 0.5),
-                            .fadeOut(withDuration: 0.2),
-                            .removeFromParent()]))
+                        manager.addTextNode(on: crosshair.position, from: scoreText)
                         
                         // Play score sound
                         Audio.sharedInstance.playSound(soundFileName: Sound.score.fileName)
@@ -269,6 +252,5 @@ extension StageScene {
             crosshair.position.y = scene.frame.maxY
         }
     }
-    
 }
 

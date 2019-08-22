@@ -283,4 +283,30 @@ class GameManager {
         
         return (scoreText, shotImageName)
     }
+    
+    func addShot(imageNamed imageName: String, to node: SKSpriteNode, on position: CGPoint) {
+        let convertedPosition = scene.convert(position, to: node)
+        let shot = SKSpriteNode(imageNamed: imageName)
+        
+        shot.position = convertedPosition
+        node.addChild(shot)
+        shot.run(.sequence([
+            .wait(forDuration: 2),
+            .fadeAlpha(to: 0.0, duration: 0.3),
+            .removeFromParent()]))
+    }
+    
+    func addTextNode(on position: CGPoint, from text: String) {
+        let scorePosition = CGPoint(x: position.x + 10, y: position.y + 30)
+        let scoreNode = generateTextNode(from: text)
+        scoreNode.position = scorePosition
+        scoreNode.zPosition = 9
+        scoreNode.xScale = 0.5
+        scoreNode.yScale = 0.5
+        scene.addChild(scoreNode)
+        scoreNode.run(.sequence([
+            .wait(forDuration: 0.5),
+            .fadeOut(withDuration: 0.2),
+            .removeFromParent()]))
+    }
 }
