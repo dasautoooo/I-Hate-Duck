@@ -21,6 +21,9 @@ class GameManager {
     var duckCount = 0
     var targetCount = 0
     
+    // Timer
+    var timers = [Timer]()
+    
     var duckMoveDuration: TimeInterval!
     
     let targetXPosition: [Int] = [160, 240, 320, 400, 480, 560, 640]
@@ -115,6 +118,8 @@ class GameManager {
     
     func activeDucks() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (timer) in
+            self.timers.append(timer)
+            
             let duck = self.generateDuck(hasTarget: Bool.random())
             duck.position = CGPoint(x: -10, y: Int.random(in: 60...90))
             duck.zPosition = Int.random(in: 0...1) == 0 ? 4 : 6
@@ -137,6 +142,8 @@ class GameManager {
     
     func activeTargets() {
         Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { (timer) in
+            self.timers.append(timer)
+            
             let target = self.generateTarget()
             var xPosition = self.targetXPosition.randomElement()!
             
@@ -172,7 +179,13 @@ class GameManager {
         }
     }
     
-    func generateTextNode(from text: String) -> SKNode {
+    func deactivateDucksAndTargets() {
+        for timer in timers {
+            timer.invalidate()
+        }
+    }
+    
+    func generateTextNode(from text: String, leadingAnchorPoint: Bool = true) -> SKNode {
         let node = SKNode()
         var width: CGFloat = 0.0
         
@@ -215,10 +228,20 @@ class GameManager {
             width += characterNode.size.width
         }
         
-        return node
+        if leadingAnchorPoint {
+            return node
+        } else {
+            let anotherNode = SKNode()
+            
+            anotherNode.addChild(node)
+            node.position = CGPoint(x: -width/2, y: 0)
+            
+            return anotherNode
+        }
+        
     }
     
-    func update(score: String, node: inout SKNode) {
+    func update(text: String, node: inout SKNode, anchorPointAtFront: Bool = true) {
         let position = node.position
         let zPositon = node.zPosition
         let xScale = node.xScale
@@ -226,7 +249,7 @@ class GameManager {
         
         node.removeFromParent()
         
-        node = generateTextNode(from: score)
+        node = generateTextNode(from: text, leadingAnchorPoint: anchorPointAtFront)
         node.position = position
         node.zPosition = zPositon
         node.xScale = xScale

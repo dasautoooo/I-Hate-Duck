@@ -17,8 +17,17 @@ class StageScene: SKScene {
     let fire = FireButton()
     var duckScoreNode: SKNode!
     var targetScoreNode: SKNode!
+    var countDown: SKNode!
     
     var magazine: Magazine!
+    
+    // Game time
+    var timeValue: Int = 90 {
+        didSet {
+            // Change count down node
+            manager.update(text: String(timeValue), node: &countDown, anchorPointAtFront: false)
+        }
+    }
     
     // Touches
     var selectedNodes: [UITouch : SKSpriteNode] = [:]
@@ -51,6 +60,8 @@ class StageScene: SKScene {
         
         manager.activeDucks()
         manager.activeTargets()
+        
+        doCountDown()
     }
 
 }
@@ -111,11 +122,10 @@ extension StageScene {
                         
                         // Play score sound
                         Audio.sharedInstance.playSound(soundFileName: Sound.score.fileName)
-//                        Audio.sharedInstance.player(with: Sound.reload.fileName)?.volume = 0.5
                         
                         // Update score node
-                        manager.update(score: String(manager.duckCount * manager.duckScore), node: &duckScoreNode)
-                        manager.update(score: String(manager.targetCount * manager.targetScore), node: &targetScoreNode)
+                        manager.update(text: String(manager.duckCount * manager.duckScore), node: &duckScoreNode)
+                        manager.update(text: String(manager.targetCount * manager.targetScore), node: &targetScoreNode)
 
                         // Animate shoot node
                         shootNode.physicsBody = nil
@@ -206,6 +216,12 @@ extension StageScene {
         targetScoreNode.xScale = 0.5
         targetScoreNode.yScale = 0.5
         addChild(targetScoreNode)
+        
+        // Add count down node
+        countDown = manager.generateTextNode(from: String(timeValue), leadingAnchorPoint: false)
+        countDown.position = CGPoint(x: 406, y: 340)
+        countDown.zPosition = 12
+        addChild(countDown)
 
         // Add empty magazine
         let magazineNode = SKNode()
@@ -252,5 +268,31 @@ extension StageScene {
             crosshair.position.y = scene.frame.maxY
         }
     }
+    
+    func doCountDown() {
+        let wait = SKAction.wait(forDuration: 1) //change countdown speed here
+        let block = SKAction.run({ [unowned self] in
+            if self.timeValue > 0 {
+                self.timeValue -= 1
+            } else {
+                self.removeAction(forKey: ActionKey.countDown.key)
+                
+                self.endGame()
+            }
+        })
+        let sequence = SKAction.sequence([wait,block])
+        
+        run(SKAction.repeatForever(sequence), withKey: ActionKey.countDown.key)
+    }
+    
+    // TODO: - End Game
+    func endGame() {
+        manager.deactivateDucksAndTargets()
+        magazine.bullets.removeAll()
+        
+        
+        
+    }
+    
 }
 

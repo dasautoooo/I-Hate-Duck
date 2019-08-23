@@ -10,6 +10,7 @@ import Foundation
 
 enum ActionKey: String {
     case reloading
+    case countDown
     
     var key: String {
         return rawValue

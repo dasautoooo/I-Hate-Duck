@@ -52,7 +52,7 @@ class StartScene: SKScene {
                         .fadeAlpha(to: 1.0, duration: 0.1),
                         .scale(to: 1.0, duration: 0.1),
                         .wait(forDuration: 0.3),
-                        .run {
+                        .run { [unowned self] in
                             // Start Game
                             let stageScene = StageScene(fileNamed: "StageScene")
                             stageScene?.scaleMode = .aspectFit

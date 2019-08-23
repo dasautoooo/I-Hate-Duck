@@ -96,7 +96,7 @@ class ReloadingState: GameState {
             })
             
             if i == magazine.capacity - 1 {
-                actions.append(SKAction.run {
+                actions.append(SKAction.run {  [unowned self] in
                     self.fire.isReloading = false
                     self.stateMachine?.enter(ShootingState.self)
                 })
