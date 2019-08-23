@@ -25,6 +25,8 @@
 		D7AF8D8B230683DD00FAEE0C /* GameStateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8A230683DD00FAEE0C /* GameStateMachine.swift */; };
 		D7AF8D8D2306883300FAEE0C /* Magazine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8C2306883300FAEE0C /* Magazine.swift */; };
 		D7AF8D8F2306AB7700FAEE0C /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7AF8D8E2306AB7700FAEE0C /* Texture.swift */; };
+		D7C0B4C2230FC40E00525AE2 /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D7C0B4C1230FC40E00525AE2 /* StartScene.sks */; };
+		D7C0B4C4230FC9E000525AE2 /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7C0B4C3230FC9E000525AE2 /* StartScene.swift */; };
 		D7D1D3F3230511D700749685 /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D1D3F2230511D700749685 /* Bullet.swift */; };
 		D7FAB13E230D4408004ED371 /* ScoreNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FAB13D230D4408004ED371 /* ScoreNumber.swift */; };
 		D7FAB140230E5AC3004ED371 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7FAB13F230E5AC3004ED371 /* Audio.swift */; };
@@ -54,6 +56,8 @@
 		D7AF8D8A230683DD00FAEE0C /* GameStateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateMachine.swift; sourceTree = "<group>"; };
 		D7AF8D8C2306883300FAEE0C /* Magazine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Magazine.swift; sourceTree = "<group>"; };
 		D7AF8D8E2306AB7700FAEE0C /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
+		D7C0B4C1230FC40E00525AE2 /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
+		D7C0B4C3230FC9E000525AE2 /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		D7D1D3F2230511D700749685 /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		D7FAB13D230D4408004ED371 /* ScoreNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreNumber.swift; sourceTree = "<group>"; };
 		D7FAB13F230E5AC3004ED371 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 			children = (
 				D70DCFFB2301686F0011880E /* MyScene.sks */,
 				D70BE1C62301483500E2938C /* StageScene.sks */,
+				D7C0B4C1230FC40E00525AE2 /* StartScene.sks */,
+				D7C0B4C3230FC9E000525AE2 /* StartScene.swift */,
 				D70BE1CA2301483500E2938C /* StageScene.swift */,
 			);
 			path = Scene;
@@ -230,6 +236,7 @@
 				D70BE1D02301483500E2938C /* Main.storyboard in Resources */,
 				D70B9C23230E6D4800F0E77A /* score.wav in Resources */,
 				D70BE1C72301483500E2938C /* StageScene.sks in Resources */,
+				D7C0B4C2230FC40E00525AE2 /* StartScene.sks in Resources */,
 				D70BE1D22301483900E2938C /* Assets.xcassets in Resources */,
 				D70BE1D52301483900E2938C /* LaunchScreen.storyboard in Resources */,
 				D7FAB143230E6311004ED371 /* Cheerful Annoyance.wav in Resources */,
@@ -253,6 +260,7 @@
 				D70B9C25230E758500F0E77A /* GameManager.swift in Sources */,
 				D70BE1CD2301483500E2938C /* GameViewController.swift in Sources */,
 				D7FAB13E230D4408004ED371 /* ScoreNumber.swift in Sources */,
+				D7C0B4C4230FC9E000525AE2 /* StartScene.swift in Sources */,
 				D70BE1C52301483500E2938C /* AppDelegate.swift in Sources */,
 				D7FAB149230E6744004ED371 /* Sound.swift in Sources */,
 				D7FAB140230E5AC3004ED371 /* Audio.swift in Sources */,
